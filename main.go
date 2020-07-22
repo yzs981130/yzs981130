@@ -61,7 +61,7 @@ const (
 	latestRepoCnt    = 5
 	enableSortByName = true
 	originReadmeFile = "./README-1.md"
-	ciCommitID		 = "actions-user"
+	ciCommitID       = "actions-user"
 )
 
 type latestProjectEntry struct {
@@ -179,7 +179,7 @@ var markdownTableTmpl = `| [{{.RepoName}}]({{.RepoUrl}}) | [{{.BranchName}}]({{.
 `
 
 var markdownTableHeaderTmpl = `
-| repo | branch | commit | author | time since | language |
+| repo | branch | commit | author | time since last update | language |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 `
 
