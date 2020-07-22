@@ -58,7 +58,7 @@ GraphQL:
 */
 
 const (
-	latestRepoCnt = 5
+	latestRepoCnt    = 5
 	enableSortByName = true
 	originReadmeFile = "./README-1.md"
 )
@@ -93,34 +93,34 @@ func fetchLatestProjects(client *githubv4.Client) []latestProjectEntry {
 		"latestRepoCnt": githubv4.Int(latestRepoCnt),
 	}
 	// get latest pushed repo
-	var query struct{
-		Viewer struct{
-			Login string
-			Repositories struct{
-				Nodes []struct{
-					Name string
-					Description string
-					Url string
-					PrimaryLanguage struct{
+	var query struct {
+		Viewer struct {
+			Login        string
+			Repositories struct {
+				Nodes []struct {
+					Name            string
+					Description     string
+					Url             string
+					PrimaryLanguage struct {
 						Name string
 					}
 					PushedAt time.Time
-					IsFork bool
-					Refs struct{
-						Edges []struct{
-							Node struct{
-								Name string
-								Target struct{
-									Commit struct{
-										History struct{
-											Edges []struct{
-												Node struct{
-													CommitUrl string
+					IsFork   bool
+					Refs     struct {
+						Edges []struct {
+							Node struct {
+								Name   string
+								Target struct {
+									Commit struct {
+										History struct {
+											Edges []struct {
+												Node struct {
+													CommitUrl      string
 													AbbreviatedOid string
-													Author struct{
-														User struct{
+													Author         struct {
+														User struct {
 															Login string
-															Url string
+															Url   string
 														}
 													}
 												}
