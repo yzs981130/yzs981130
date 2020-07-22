@@ -61,6 +61,7 @@ const (
 	latestRepoCnt    = 5
 	enableSortByName = true
 	originReadmeFile = "./README-1.md"
+	ciCommitID		 = "actions-user"
 )
 
 type latestProjectEntry struct {
@@ -164,7 +165,7 @@ func fetchLatestProjects(client *githubv4.Client) []latestProjectEntry {
 	}
 	if enableSortByName {
 		sort.SliceStable(result, func(i, j int) bool {
-			return result[i].CommitAuthorID == query.Viewer.Login && result[j].CommitAuthorID != query.Viewer.Login
+			return result[j].CommitAuthorID == ciCommitID || (result[i].CommitAuthorID == query.Viewer.Login && result[j].CommitAuthorID != query.Viewer.Login)
 		})
 	}
 
