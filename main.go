@@ -68,6 +68,7 @@ type latestProjectEntry struct {
 	// repo info
 	RepoName string
 	RepoUrl  string
+	RepoUri  string
 	RepoLang string
 
 	// commit info
@@ -148,6 +149,7 @@ func fetchLatestProjects(client *githubv4.Client) []latestProjectEntry {
 		entry := latestProjectEntry{
 			RepoName:        repo.Name,
 			RepoUrl:         repo.Url,
+			RepoUri: 		 repo.Url[len("https://github.com/"):],
 			RepoLang:        repo.PrimaryLanguage.Name,
 			BranchName:      repo.Refs.Edges[0].Node.Name,
 			BranchUrl:       repo.Url + "/tree/" + repo.Refs.Edges[0].Node.Name,
@@ -172,10 +174,12 @@ func fetchLatestProjects(client *githubv4.Client) []latestProjectEntry {
 	return result
 }
 
+/* Not using now...
 var markdownTmpl = `
 - [{{.RepoName}}]({{.RepoUrl}}) on branch [{{.BranchName}}]({{.BranchUrl}}) with commit [{{.CommitID}}]({{.CommitUrl}}) by [@{{.CommitAuthorID}}]({{.CommitAuthorUrl}}) {{.Time}} ago  ![](https://img.shields.io/badge/language-{{.RepoLang}}-default.svg?style=flat-square)`
+*/
 
-var markdownTableTmpl = `| [{{.RepoName}}]({{.RepoUrl}}) | [{{.BranchName}}]({{.BranchUrl}}) |[{{.CommitID}}]({{.CommitUrl}}) | [@{{.CommitAuthorID}}]({{.CommitAuthorUrl}}) |{{.Time}} | ![](https://img.shields.io/badge/language-{{.RepoLang}}-default.svg?style=flat-square)|
+var markdownTableTmpl = `| [{{.RepoName}}]({{.RepoUrl}}) | [{{.BranchName}}]({{.BranchUrl}}) |[{{.CommitID}}]({{.CommitUrl}}) | [@{{.CommitAuthorID}}]({{.CommitAuthorUrl}}) |{{.Time}} | ![](https://img.shields.io/github/languages/top/{{.RepoUri}})|
 `
 
 var markdownTableHeaderTmpl = `
